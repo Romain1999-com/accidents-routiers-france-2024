@@ -1,28 +1,37 @@
 # Checklist de remise — TP Data Visualisation Open Data
 
-## Déjà inclus dans le dossier
+## Livrables présents dans le dépôt
 
-- [x] 6 tableaux de bord (minimum demandé : 4)
-- [x] Captures des 6 dashboards
-- [x] Classeur Tableau Desktop `.twbx`
-- [x] Export SQL complet (4 tables métier + données + 5 vues)
-- [x] 13 scripts SQL historiques Navicat
-- [x] Requêtes de contrôle d'import
-- [x] Rapport technique final Word/PDF
-- [x] Présentation PowerPoint (12 diapositives)
-- [x] README et arborescence du dépôt
+- [x] 6 tableaux de bord (minimum demandé : 4) et leurs captures.
+- [x] Classeur Tableau Desktop `.twbx` (connexion MySQL directe, sans extrait embarqué).
+- [x] Export SQL complet : données, 4 tables métier et 5 vues.
+- [x] 13 scripts SQL historiques Navicat (non destinés à une exécution en bloc).
+- [x] Requêtes de contrôle d'import et résultats d'intégrité.
+- [x] Rapport technique Word et PDF.
+- [x] Présentation PowerPoint et PDF (12 diapositives).
+- [x] README, provenance des données et structure du dépôt.
 
-## Vérifications indispensables avant dépôt GitHub
+## Vérifications réalisées et documentées
 
-- [x] Documenter l'URL officielle, le producteur et la licence dans data/README.md.
+- [x] URL officielle du jeu de données, producteur et licence renseignés dans `data/README.md`.
+- [x] Restauration SQL testée le 16 novembre 2026 dans `dataviz_accidents_2024_test` : 342 545 requêtes sans erreur, 4 tables et 5 vues.
+- [x] Contrôle des volumes de la base restaurée.
+- [x] Quatre vérifications de relations : 0 référence orpheline détectée sur les relations contrôlées, pour les clés non nulles.
+- [x] Captures et fichiers de résultats enregistrés dans `captures/` et `sql/controle/`.
+
+## À terminer avant publication et remise
+
 - [ ] Renseigner la date exacte du téléchargement initial des données.
-- [ ] Documenter le format et la procédure réelle d'import des fichiers sources.
-- [ ] Tester la restauration sur une base MySQL vide et exécuter `sql/controle/verification_import_2024.sql`.
-- [ ] Tester la connexion et les six dashboards dans Tableau Desktop après réimport.
-- [ ] Vérifier le pilote MySQL utilisé et noter sa version sans exposer d'identifiants sensibles.
-- [ ] Confirmer l'acceptation de Navicat Premium Lite si exigée par le formateur.
-- [ ] Vérifier les licences, la présence éventuelle de données sensibles et les métadonnées avant publication.
-- [ ] Publier sur GitHub et tester les liens du README.
-- [ ] Répéter la soutenance (10–15 min), captures de secours disponibles.
+- [ ] Documenter les dimensions, l'encodage, les séparateurs et la procédure réelle d'import des quatre CSV.
+- [ ] Tester la reconnexion Tableau Desktop et les six dashboards après restauration MySQL, puis les interactions.
+- [ ] Relever le nom et la version du pilote MySQL effectivement utilisé.
+- [ ] Confirmer l'acceptation de Navicat Premium Lite par le formateur si nécessaire.
+- [ ] Contrôler les licences, les métadonnées, les secrets et l'historique Git avant publication publique.
+- [ ] Régénérer `MANIFEST_SHA256.tsv` : le manifeste existant est antérieur à certains ajouts et corrections.
+- [ ] Passer le dépôt GitHub en **Public** et tester l'accès en navigation privée.
+- [ ] Vérifier tous les liens du README.
+- [ ] Répéter la soutenance (10–15 minutes) et prévoir les captures de secours.
 
-**Avertissement :** l'export SQL contient des instructions de suppression/recréation de tables et vues. Ne pas l'exécuter dans une base de production ou une base contenant du travail non sauvegardé.
+**Attention :** l'export SQL contient des instructions de suppression / recréation. Ne pas l'exécuter dans une base de production ou contenant du travail non sauvegardé.
+
+**Note :** les résultats de restauration documentés ne constituent pas un test indépendant du classeur Tableau sur un autre poste.
