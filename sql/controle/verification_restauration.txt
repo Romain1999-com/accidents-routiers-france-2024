@@ -1,0 +1,5 @@
+"controle"	"anomalies"
+"Lieux sans accident"	"0"
+"Usagers sans accident"	"0"
+"Vehicules sans accident"	"0"
+"Usagers sans vehicule"	"0"
