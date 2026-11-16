@@ -1,52 +1,76 @@
 # Accidents routiers en France — 2024
 
-**Livrable final du TP Data Visualisation Open Data — version du 16 novembre 2026**  
-**Architecture :** données ouvertes → préparation SQL dans Navicat Premium Lite → MySQL → connexion directe → Tableau Desktop → six tableaux de bord → soutenance.
+**Livrable du TP Data Visualisation Open Data — mise à jour documentaire du 16 novembre 2026**
 
-## Contenu du livrable
+**Chaîne de traitement :** données ouvertes BAAC 2024 → import et préparation SQL avec Navicat Premium Lite / MySQL → vues SQL → connexion MySQL directe → Tableau Desktop → six tableaux de bord → soutenance.
 
-| Dossier | Contenu |
+## Source des données
+
+- **Producteur :** Ministère de l'Intérieur ; données BAAC diffusées par l'Observatoire national interministériel de la sécurité routière (ONISR).
+- **Plateforme :** [data.gouv.fr — Bases de données annuelles des accidents corporels](https://www.data.gouv.fr/datasets/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2025).
+- **Périmètre :** France, accidents corporels enregistrés en 2024.
+- **Fichiers utilisés :** `caract-2024.csv`, `lieux-2024.csv`, `vehicules-2024.csv`, `usagers-2024.csv`.
+- **Licence indiquée dans la documentation du projet :** Licence Ouverte / Open Licence.
+- **Date exacte du téléchargement initial :** à confirmer (ne pas confondre avec la date des contrôles du 16 novembre 2026).
+
+Voir [data/README.md](data/README.md) pour les sources, les volumes, les contrôles et les informations restant à renseigner.
+
+## Contenu du dépôt
+
+| Dossier / fichier | Contenu |
 |---|---|
-| `sql/base_complete/` | Export MySQL complet nettoyé (données, 4 tables et 5 vues) et schéma sans données |
-| `sql/controle/` | Requêtes de vérification après import |
-| `sql/historique_navicat/` | 13 scripts de travail originaux ; ne pas exécuter en bloc |
+| `sql/base_complete/` | Export MySQL avec données (4 tables métier et 5 vues) et schéma sans données |
+| `sql/controle/` | Requêtes de vérification, résultats des contrôles d'intégrité et de restauration |
+| `sql/historique_navicat/` | 13 scripts de travail historiques ; certains modifient les données : ne pas exécuter en bloc |
 | `tableau/` | Classeur `.twbx` (18 feuilles, 6 dashboards) et procédure de reconnexion |
-| `captures/` | Captures DB01 à DB06 et deux contrôles techniques |
-| `documentation/` | Rapport technique final `.docx` et version PDF |
-| `presentation/` | Présentation PowerPoint pour 10 à 15 minutes |
-| `data/` | Métadonnées et provenance des données à compléter |
+| `captures/` | Six captures de dashboards et quatre captures techniques |
+| `documentation/` | Rapport technique Word et PDF |
+| `presentation/` | Soutenance PowerPoint et PDF (10 à 15 minutes) |
+| `data/` | Provenance des données, métadonnées et contrôles |
+| `MANIFEST_SHA256.tsv` | Manifeste historique : **à régénérer après les dernières modifications**, voir la checklist |
 
-## Indicateurs de référence (DB06 sans filtre départemental)
+## Indicateurs de référence (DB06, sans filtre départemental)
 
-| KPI | Valeur affichée |
+| Indicateur | Valeur affichée |
 |---|---:|
 | Accidents | **54 402** |
 | Usagers impliqués | **125 187** |
 | Véhicules impliqués | **92 678** |
 | Personnes décédées | **3 432** |
 
-Ces valeurs sont observées sur les captures Tableau. Le nombre de décès n'a pas été recalculé indépendamment dans l'environnement d'assemblage.
+Ces valeurs proviennent des résultats et captures du projet. Le total de décès n'a pas été recalculé indépendamment lors de l'assemblage du livrable.
 
 ## Reconstruction de la base MySQL
 
-1. Installer **MySQL 8.0** et un client SQL (Navicat Premium Lite convient).
-2. Utiliser **une base de test vide** : `sql/base_complete/dataviz_accidents_2024_propre.sql` comporte des `DROP TABLE` et `DROP VIEW` ; il détruit les objets existants portant ces noms.
-3. Exécuter ce fichier en UTF-8. Il crée et sélectionne la base `dataviz_accidents_2024`.
-4. Exécuter `sql/controle/verification_import_2024.sql` et vérifier les volumes : 54 403 caractéristiques (dont `Num_Acc = 0`), 70 249 lieux, 125 187 usagers et 92 678 véhicules. La vue des accidents exclut `Num_Acc = 0` et doit compter 54 402 accidents.
-5. Vérifier la présence des vues `vue_accidents_2024`, `vue_cartographie_2024`, `vue_luminosite_2024`, `vue_usagers_2024`, `vue_vehicules_2024`.
+1. Installer MySQL 8.0 et un client SQL compatible (Navicat Premium Lite a été utilisé pour le projet).
+2. Utiliser une **instance / base de test**, sans données à conserver. Le fichier `sql/base_complete/dataviz_accidents_2024_propre.sql` comporte des instructions `DROP TABLE` et `DROP VIEW`.
+3. Exécuter cet export en UTF-8. Il recrée la base `dataviz_accidents_2024` ; vérifier les instructions avant toute exécution.
+4. Exécuter `sql/controle/verification_import_2024.sql` et vérifier : 54 403 lignes dans `caracteristiques` (dont une ligne `Num_Acc = 0`), 70 249 dans `lieux`, 125 187 dans `usagers-2024` et 92 678 dans `vehicules-2024`.
+5. Vérifier les cinq vues : `vue_accidents_2024`, `vue_cartographie_2024`, `vue_luminosite_2024`, `vue_usagers_2024`, `vue_vehicules_2024`. La vue des accidents doit compter **54 402** lignes.
 
-Le fichier `schema_et_vues_2024.sql` sert à consulter la structure sans données : il ne remplace **pas** l'export complet pour reproduire les graphiques.
+`schema_et_vues_2024.sql` décrit la structure sans les données ; il ne remplace pas l'export complet.
 
-## Ouverture du projet Tableau Desktop
+### Contrôles de restauration et d'intégrité
+
+Le **16 novembre 2026**, une restauration a été réalisée dans une base de test indépendante `dataviz_accidents_2024_test`. Selon les résultats enregistrés dans le projet :
+
+- **342 545 requêtes SQL** exécutées sans erreur ;
+- **4 tables métier** restaurées avec les volumes attendus ;
+- **5 vues** recréées et interrogées ;
+- **4 contrôles de relations** par jointures externes : **0 référence orpheline** détectée sur les relations contrôlées, pour les clés non nulles.
+
+Les fichiers `sql/controle/verification technique.csv`, `sql/controle/verification_restauration.txt` et les captures `03_controle_tables.png`, `04_verification_integrite_restauration.png` documentent ces résultats. Ces contrôles ne démontrent pas à eux seuls l'absence de toute anomalie de qualité.
+
+## Ouverture du classeur Tableau Desktop
 
 1. Ouvrir `tableau/Dataviz_Accidents_Routiers_2024.twbx`.
-2. Configurer l'accès à MySQL local (port 3306 ou port effectif) ; installer le pilote MySQL compatible si Tableau le demande.
-3. Actualiser les données et contrôler les quatre KPI et les six dashboards.
-4. Tester les filtres et actions sur DB01 et DB06. Voir `tableau/VERIFICATION_CONNEXION.md`.
+2. Configurer la connexion à MySQL local (port 3306 ou port réellement utilisé) et installer le pilote compatible si nécessaire.
+3. Actualiser les données, comparer les KPI et contrôler les six dashboards.
+4. Tester les filtres et actions de DB01 et DB06 ; consulter [tableau/VERIFICATION_CONNEXION.md](tableau/VERIFICATION_CONNEXION.md).
 
-**Attention :** le `.twbx` contient une connexion MySQL **en direct**, et **aucun extrait de données**. Il ne fonctionnera pas hors connexion à MySQL sans modification.
+**Important :** le `.twbx` utilise une **connexion directe MySQL** et ne contient **aucun extrait de données**. Le fonctionnement sur un autre poste, après restauration, reste à valider dans Tableau Desktop.
 
-## Tableaux de bord
+## Six tableaux de bord
 
 - [DB01 — Cartographie](captures/DB01_cartographie.png)
 - [DB02 — Analyse temporelle](captures/DB02_analyse_temporelle.png)
@@ -57,15 +81,17 @@ Le fichier `schema_et_vues_2024.sql` sert à consulter la structure sans donnée
 
 ![DB06 — Synthèse générale](captures/DB06_synthese_generale.png)
 
-## Démarche et limites
+## Méthode et limites
 
-La préparation et les contrôles ont été réalisés dans **Navicat Premium Lite**, avec MySQL comme moteur de stockage et de requêtes. Une anomalie de comparaison des longitudes texte a été corrigée dans la vue cartographique (normalisation des virgules décimales et conversion explicite). Les nombres représentent des volumes enregistrés et **non** des taux de risque : l'exposition au trafic n'est pas disponible. Les données 2024 seules ne permettent pas d'établir une tendance pluriannuelle.
+La préparation et les contrôles ont été réalisés dans Navicat Premium Lite, MySQL servant au stockage et aux requêtes. Une anomalie de comparaison des longitudes textuelles a été corrigée dans la vue cartographique par normalisation des virgules décimales et conversion explicite. Les volumes décrivent les accidents enregistrés, **pas un risque rapporté au trafic**. L'analyse de 2024 ne permet pas d'établir une tendance pluriannuelle.
 
-## Statut de validation et informations manquantes
+## Vérifications restant à terminer avant publication
 
-- **Vérifié statiquement :** présence des fichiers, structure SQL, quatre tables et cinq vues, structure du classeur Tableau (18 feuilles / 6 dashboards), captures et support.
-- **Non testé ici :** restauration MySQL, exécution des vues sur une base réimportée, rafraîchissement du classeur sur un autre poste.
-- **À renseigner :** URL officielle du jeu de données, producteur, licence, date/méthode de téléchargement, pilote de connexion utilisé et éventuelle validation de Navicat par le formateur.
-- **À faire avant dépôt public :** contrôle des métadonnées, des droits de réutilisation et de l'absence de secrets. Aucun mot de passe ne doit être publié.
+- Compléter la **date initiale de collecte**, les dimensions et les formats exacts des CSV, ainsi que les paramètres d'import.
+- Documenter la **version du pilote MySQL** utilisé et vérifier, si nécessaire, l'acceptation de Navicat Premium Lite par le formateur.
+- Tester le **rafraîchissement Tableau et les interactions après restauration**, sur l'environnement prévu pour la soutenance.
+- Contrôler les **secrets, les métadonnées, les droits de réutilisation et l'historique Git** avant de rendre le dépôt public.
+- **Régénérer `MANIFEST_SHA256.tsv`** après les modifications : sa version actuelle n'est pas une preuve à jour de l'intégrité du dépôt.
+- Vérifier la visibilité **Public** et l'accès anonyme au dépôt, puis répéter la soutenance.
 
-Voir [`CHECKLIST_AVANT_REMISE.md`](CHECKLIST_AVANT_REMISE.md) et [`data/README.md`](data/README.md).
+Voir [CHECKLIST_AVANT_REMISE.md](CHECKLIST_AVANT_REMISE.md). **Ne jamais publier de mot de passe.**
