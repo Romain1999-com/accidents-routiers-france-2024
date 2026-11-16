@@ -14,7 +14,8 @@
 
 ## Vérifications indispensables avant dépôt GitHub
 
-- [ ] Renseigner l'URL officielle, le producteur, la licence et la date de collecte dans `data/README.md`.
+- [x] Documenter l'URL officielle, le producteur et la licence dans data/README.md.
+- [ ] Renseigner la date exacte du téléchargement initial des données.
 - [ ] Documenter le format et la procédure réelle d'import des fichiers sources.
 - [ ] Tester la restauration sur une base MySQL vide et exécuter `sql/controle/verification_import_2024.sql`.
 - [ ] Tester la connexion et les six dashboards dans Tableau Desktop après réimport.
