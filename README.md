@@ -91,7 +91,6 @@ La préparation et les contrôles ont été réalisés dans Navicat Premium Lite
 - Documenter la **version du pilote MySQL** utilisé et vérifier, si nécessaire, l'acceptation de Navicat Premium Lite par le formateur.
 - Tester le **rafraîchissement Tableau et les interactions après restauration**, sur l'environnement prévu pour la soutenance.
 - Contrôler les **secrets, les métadonnées, les droits de réutilisation et l'historique Git** avant de rendre le dépôt public.
-- **Régénérer `MANIFEST_SHA256.tsv`** après les modifications : sa version actuelle n'est pas une preuve à jour de l'intégrité du dépôt.
-- Vérifier la visibilité **Public** et l'accès anonyme au dépôt, puis répéter la soutenance.
+- Manifeste SHA256 généré et contrôlé le 16 novembre 2026 : 42 fichiers vérifiés, empreintes et tailles conformes.- Vérifier la visibilité **Public** et l'accès anonyme au dépôt, puis répéter la soutenance.
 
 Voir [CHECKLIST_AVANT_REMISE.md](CHECKLIST_AVANT_REMISE.md). **Ne jamais publier de mot de passe.**
