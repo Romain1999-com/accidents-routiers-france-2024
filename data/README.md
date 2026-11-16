@@ -58,3 +58,17 @@ Ces valeurs correspondent aux volumes documentés dans la base MySQL après impo
 La reconstruction de la base est documentée dans le dossier `sql/base_complete/` du dépôt GitHub.
 
 Le classeur Tableau Desktop utilise une connexion directe à MySQL. Les données ne sont pas embarquées sous forme d'extrait dans le classeur fourni.
+
+### Validation de l'intégrité référentielle
+
+Une vérification de l'intégrité référentielle a été réalisée le 16 novembre 2026 sur la base MySQL `dataviz_accidents_2024`, à l'aide de Navicat Premium Lite.
+
+L'analyse du schéma a confirmé la présence de quatre contraintes de clés étrangères reliant les tables `caracteristiques`, `lieux`, `usagers-2024` et `vehicules-2024`.
+
+Quatre requêtes de contrôle utilisant des jointures externes (`LEFT JOIN`) ont été exécutées afin de rechercher d'éventuelles références orphelines.
+
+**Résultat : aucune référence orpheline détectée sur les quatre relations contrôlées, pour les clés étrangères non nulles.**
+
+Les contrôles de volumétrie ont également confirmé la présence de 54 402 accidents distincts valides, 70 249 enregistrements de lieux, 125 187 usagers et 92 678 véhicules.
+
+Ces résultats valident les relations testées dans l'environnement MySQL utilisé pour le projet. Ils ne constituent toutefois pas une validation exhaustive de la qualité de toutes les données.
