@@ -1,0 +1,12 @@
+# Secrets et fichiers locaux
+.env
+.env.*
+*.log
+*.bak
+*.tmp
+*.db
+*.sqlite
+*.sql.gz
+.DS_Store
+Thumbs.db
+__pycache__/
