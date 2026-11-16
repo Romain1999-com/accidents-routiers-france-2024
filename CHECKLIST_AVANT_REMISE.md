@@ -27,7 +27,7 @@
 - [ ] Relever le nom et la version du pilote MySQL effectivement utilisé.
 - [ ] Confirmer l'acceptation de Navicat Premium Lite par le formateur si nécessaire.
 - [ ] Contrôler les licences, les métadonnées, les secrets et l'historique Git avant publication publique.
-- [ ] Régénérer `MANIFEST_SHA256.tsv` : le manifeste existant est antérieur à certains ajouts et corrections.
+- [x] Régénérer `MANIFEST_SHA256.tsv` :42 fichiers contrôlés avec succès.
 - [ ] Passer le dépôt GitHub en **Public** et tester l'accès en navigation privée.
 - [ ] Vérifier tous les liens du README.
 - [ ] Répéter la soutenance (10–15 minutes) et prévoir les captures de secours.
