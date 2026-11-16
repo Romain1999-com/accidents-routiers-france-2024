@@ -72,3 +72,18 @@ Quatre requêtes de contrôle utilisant des jointures externes (`LEFT JOIN`) ont
 Les contrôles de volumétrie ont également confirmé la présence de 54 402 accidents distincts valides, 70 249 enregistrements de lieux, 125 187 usagers et 92 678 véhicules.
 
 Ces résultats valident les relations testées dans l'environnement MySQL utilisé pour le projet. Ils ne constituent toutefois pas une validation exhaustive de la qualité de toutes les données.
+
+### Validation de la restauration MySQL
+
+Une restauration complète de la base de données a été réalisée le 16 novembre 2026 dans un environnement de test indépendant (`dataviz_accidents_2024_test`), à partir de l'export SQL du projet.
+
+**Résultats des vérifications :**
+
+- 342 545 requêtes SQL exécutées sans erreur.
+- 4 tables métier restaurées avec des volumes identiques à la base originale.
+- 5 vues SQL recréées et interrogées avec succès.
+- 4 contrôles d'intégrité référentielle réalisés, sans anomalie détectée.
+
+Cette procédure confirme la reproductibilité de la base de données sur l'environnement MySQL testé.
+
+Les preuves de vérification sont disponibles dans le répertoire `captures/` et les requêtes SQL dans `sql/controle/`.
