@@ -1,8 +1,8 @@
-\# Machine Learning — Accidents routiers en France 2024
+# Machine Learning — Accidents routiers en France 2024
 
 
 
-\## 1. Objectif
+## 1. Objectif
 
 
 
@@ -18,19 +18,19 @@ Il s'agit d'une analyse exploratoire non supervisée et non d'un modèle de pré
 
 
 
-\## 2. Données utilisées
+## 2. Données utilisées
 
 
 
-\- Source : données d'accidents routiers 2024 exploitées dans le projet MySQL.
+- Source : données d'accidents routiers 2024 exploitées dans le projet MySQL.
 
-\- Vue SQL : `vue\_accidents\_2024`.
+- Vue SQL : `vue_accidents_2024`.
 
-\- Nombre d'accidents : \*\*54 402\*\*.
+- Nombre d'accidents : **54 402**.
 
-\- Nombre de variables initiales : \*\*7\*\*, dont l'identifiant de l'accident.
+- Nombre de variables initiales : **7**, dont l'identifiant de l'accident.
 
-\- Valeurs manquantes détectées dans le CSV : \*\*0\*\*.
+- Valeurs manquantes détectées dans le CSV : **0**.
 
 
 
@@ -38,25 +38,25 @@ Variables utilisées pour l'apprentissage :
 
 
 
-\- Heure de l'accident
+- Heure de l'accident
 
-\- Luminosité
+- Luminosité
 
-\- Conditions atmosphériques
+- Conditions atmosphériques
 
-\- Type d'intersection
+- Type d'intersection
 
-\- Localisation en ou hors agglomération
+- Localisation en ou hors agglomération
 
-\- Type de collision
-
-
-
-L'identifiant `Num\_Acc` est exclu de l'entraînement.
+- Type de collision
 
 
 
-\## 3. Méthodologie
+L'identifiant `Num_Acc` est exclu de l'entraînement.
+
+
+
+## 3. Méthodologie
 
 
 
@@ -68,23 +68,23 @@ Les étapes sont les suivantes :
 
 
 
-1\. Importation des données CSV.
+1. Importation des données CSV.
 
-2\. Transformation cyclique de l'heure à l'aide du sinus et du cosinus.
+2. Transformation cyclique de l'heure à l'aide du sinus et du cosinus.
 
-3\. Encodage One-Hot des variables catégorielles.
+3. Encodage One-Hot des variables catégorielles.
 
-4\. Préparation de \*\*35 variables numériques\*\*.
+4. Préparation de **35 variables numériques**.
 
-5\. Pondération des groupes de variables.
+5. Pondération des groupes de variables.
 
-6\. Comparaison de K-means pour k allant de 2 à 6.
+6. Comparaison de K-means pour k allant de 2 à 6.
 
-7\. Sélection selon le score de silhouette.
+7. Sélection selon le score de silhouette.
 
-8\. Entraînement final sur les 54 402 accidents.
+8. Entraînement final sur les 54 402 accidents.
 
-9\. Analyse descriptive des clusters et création de graphiques.
+9. Analyse descriptive des clusters et création de graphiques.
 
 
 
@@ -92,7 +92,7 @@ La comparaison des modèles utilise un échantillon de 10 000 accidents et une �
 
 
 
-\## 4. Résultats
+## 4. Résultats
 
 
 
@@ -102,7 +102,7 @@ La comparaison des modèles utilise un échantillon de 10 000 accidents et une �
 
 | 2 | 0,1713 |
 
-| 3 | \*\*0,1769\*\* |
+| 3 | **0,1769** |
 
 | 4 | 0,1344 |
 
@@ -112,11 +112,11 @@ La comparaison des modèles utilise un échantillon de 10 000 accidents et une �
 
 
 
-Le modèle à \*\*3 clusters\*\* obtient le meilleur score parmi les configurations testées.
+Le modèle à **3 clusters** obtient le meilleur score parmi les configurations testées.
 
 
 
-\### Profils identifiés
+### Profils identifiés
 
 
 
@@ -130,7 +130,7 @@ Le modèle à \*\*3 clusters\*\* obtient le meilleur score parmi les configurati
 
 | 2 | Urbain, de jour | 22 620 | 41,6 % |
 
-| \*\*Total\*\* | | \*\*54 402\*\* | \*\*100 %\*\* |
+| **Total** | | **54 402** | **100 %** |
 
 
 
@@ -138,11 +138,11 @@ Ces intitulés ont été attribués après l'analyse des caractéristiques domin
 
 
 
-\## 5. Limites
+## 5. Limites
 
 
 
-Le score de silhouette de \*\*0,1769\*\* indique une séparation relativement faible des groupes.
+Le score de silhouette de **0,1769** indique une séparation relativement faible des groupes.
 
 
 
@@ -158,49 +158,49 @@ Le modèle ne permet pas de prédire la survenue d'un accident, sa gravité ou l
 
 
 
-\## 6. Fichiers du module
+## 6. Fichiers du module
 
 
 
-\*\*Scripts Python :\*\*
+**Scripts Python :**
 
 
 
-\- `preparer\_donnees.py` : préparation et encodage.
+- `preparer_donnees.py` : préparation et encodage.
 
-\- `entrainer\_kmeans.py` : comparaison et entraînement.
+- `entrainer_kmeans.py` : comparaison et entraînement.
 
-\- `analyser\_clusters.py` : caractérisation des groupes.
+- `analyser_clusters.py` : caractérisation des groupes.
 
-\- `graphiques\_clusters.py` : visualisation des résultats.
-
-
-
-\*\*Données et résultats :\*\*
+- `graphiques_clusters.py` : visualisation des résultats.
 
 
 
-\- `accidents\_2024\_ml.csv`
-
-\- `accidents\_2024\_prepares.csv`
-
-\- `accidents\_2024\_clusters.csv`
-
-\- `profils\_clusters.csv`
+**Données et résultats :**
 
 
 
-\*\*Visualisations :\*\*
+- `accidents_2024_ml.csv`
+
+- `accidents_2024_prepares.csv`
+
+- `accidents_2024_clusters.csv`
+
+- `profils_clusters.csv`
 
 
 
-\- `graphique\_repartition\_clusters.png`
-
-\- `graphique\_luminosite\_clusters.png`
+**Visualisations :**
 
 
 
-\## 7. Reproduction
+- `graphique_repartition_clusters.png`
+
+- `graphique_luminosite_clusters.png`
+
+
+
+## 7. Reproduction
 
 
 
@@ -216,17 +216,17 @@ Installer les dépendances :
 
 
 
-Depuis le dossier `machine\_learning`, exécuter dans cet ordre :
+Depuis le dossier `machine_learning`, exécuter dans cet ordre :
 
 
 
-1\. `python preparer\_donnees.py`
+1. `python preparer_donnees.py`
 
-2\. `python entrainer\_kmeans.py`
+2. `python entrainer_kmeans.py`
 
-3\. `python analyser\_clusters.py`
+3. `python analyser_clusters.py`
 
-4\. `python graphiques\_clusters.py`
+4. `python graphiques_clusters.py`
 
 
 
@@ -234,7 +234,7 @@ Les scripts utilisent des chemins relatifs : ils doivent être exécutés depuis
 
 
 
-\## 8. Conclusion
+## 8. Conclusion
 
 
 
@@ -247,4 +247,3 @@ Le clustering K-means permet de distinguer trois profils descriptifs principalem
 
 
 Il complète les six tableaux de bord Tableau Desktop en proposant une approche exploratoire fondée sur l'apprentissage non supervisé.
-
