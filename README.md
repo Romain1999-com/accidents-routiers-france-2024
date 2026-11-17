@@ -28,7 +28,7 @@ Voir [data/README.md](data/README.md) pour les sources, les volumes, les contrô
 | `documentation/` | Rapport technique Word et PDF |
 | `presentation/` | Support de soutenance PowerPoint et PDF |
 | `data/` | Provenance des données, métadonnées et contrôles |
-| `MANIFEST_SHA256.tsv` | Manifeste SHA256 historique (42 fichiers) : **actualisation nécessaire** après les ajouts Machine Learning et les dernières modifications |
+| `MANIFEST_SHA256.tsv` | Manifeste SHA256 de 54 fichiers, généré et contrôlé localement le 17 novembre 2026 ; **à recalculer après les dernières corrections documentaires** |
 
 ## Indicateurs de référence (DB06, sans filtre départemental)
 
@@ -119,7 +119,7 @@ La préparation et les contrôles ont été réalisés dans Navicat Premium Lite
 - **Dépôt GitHub : public**, branche `main` (visibilité vérifiée le 17 novembre 2026).
 - **Restauration MySQL et contrôles de relations : réalisés** dans l'environnement de test décrit plus haut.
 - **Machine Learning : intégré** au dépôt avec scripts, données, profils et graphiques.
-- **Manifeste SHA256 : à actualiser**. Le manifeste actuellement publié référence 42 fichiers et précède les ajouts et modifications récents. Il ne doit pas être présenté comme une vérification de l'état actuel du dépôt.
+- **Manifeste SHA256 : 54 fichiers référencés** lors du dernier contrôle local réussi (`--write` puis `--check`). Les corrections ultérieures du README et de la checklist modifient leurs empreintes : le manifeste devra être régénéré et republié pour correspondre au dernier état du dépôt.
 
 ### Informations documentaires encore à confirmer
 
@@ -127,7 +127,7 @@ La préparation et les contrôles ont été réalisés dans Navicat Premium Lite
 - **Métadonnées des CSV sources** : dimensions exactes, séparateurs et encodages de chacun des quatre fichiers, ainsi que les paramètres réellement utilisés lors de l'importation Navicat. Voir [data/README.md](data/README.md).
 - **Pilote MySQL utilisé par Tableau** : nom et version exacts non documentés.
 - **Test Tableau sur une base MySQL restaurée et/ou un autre poste** : non confirmé ; la restauration SQL ne démontre pas à elle seule le fonctionnement du classeur sur une autre installation.
-- **Contrôles de publication à refaire après les derniers changements** : recherche indicative de secrets, examen des métadonnées, vérification des liens et régénération du manifeste SHA256. Une recherche automatique antérieure n'avait signalé aucun motif de secret, mais ce contrôle n'est pas exhaustif.
+- **Contrôles de publication** : une recherche indicative de secrets a été réalisée sans motif détecté et les 54 fichiers du manifeste ont été vérifiés localement avant cette correction documentaire. Il reste à réexaminer les métadonnées et l'historique Git, vérifier les liens et relancer `--scan`, `--write` et `--check` après les dernières modifications. La recherche automatique n'est pas exhaustive.
 
 Le dépôt étant déjà public, ces éléments relèvent du **suivi documentaire et de la vérification finale**, et non de conditions préalables à sa mise en ligne.
 
