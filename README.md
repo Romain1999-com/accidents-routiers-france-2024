@@ -2,7 +2,7 @@
 
 **Livrable du TP Data Visualisation Open Data — mise à jour documentaire du 16 novembre 2026**
 
-**Chaîne de traitement :** données ouvertes BAAC 2024 → import et préparation SQL avec Navicat Premium Lite / MySQL → vues SQL → connexion MySQL directe → Tableau Desktop → six tableaux de bord → soutenance.
+**Chaîne de traitement :** données ouvertes BAAC 2024 → import et préparation SQL avec Navicat Premium Lite / MySQL → vues SQL → connexion MySQL directe → Tableau Desktop → six tableaux de bord → clustering K-means sous Python → soutenance.
 
 ## Source des données
 
@@ -22,6 +22,7 @@ Voir [data/README.md](data/README.md) pour les sources, les volumes, les contrô
 | `sql/base_complete/` | Export MySQL avec données (4 tables métier et 5 vues) et schéma sans données |
 | `sql/controle/` | Requêtes de vérification, résultats des contrôles d'intégrité et de restauration |
 | `sql/historique_navicat/` | 13 scripts de travail historiques ; certains modifient les données : ne pas exécuter en bloc |
+| `machine_learning/` | Clustering K-means des 54 402 accidents : scripts Python, données préparées, profils et graphiques |
 | `tableau/` | Classeur `.twbx` (18 feuilles, 6 dashboards) et procédure de reconnexion |
 | `captures/` | Six captures de dashboards et quatre captures techniques |
 | `documentation/` | Rapport technique Word et PDF |
@@ -81,6 +82,33 @@ Les fichiers `sql/controle/verification technique.csv`, `sql/controle/verificati
 
 ![DB06 — Synthèse générale](captures/DB06_synthese_generale.png)
 
+## Machine Learning — segmentation des accidents
+
+Un module de **Machine Learning non supervisé** complète les six tableaux de bord Tableau Desktop. Il cherche à regrouper les accidents présentant des caractéristiques similaires, **sans prédire** la survenue d'un accident ni sa gravité.
+
+- **Données :** 54 402 accidents corporels enregistrés en France en 2024, issus de la vue SQL `vue_accidents_2024`.
+- **Variables étudiées :** heure, luminosité, conditions atmosphériques, type d'intersection, localisation en ou hors agglomération et type de collision. L'identifiant de l'accident est exclu de l'apprentissage.
+- **Préparation :** transformation cyclique de l'heure, encodage One-Hot des catégories, puis pondération des groupes de variables ; 35 variables numériques obtenues.
+- **Algorithme :** K-means avec scikit-learn, comparaison de `k=2` à `k=6` sur un échantillon de 10 000 accidents (score de silhouette évalué sur 2 000 observations), puis entraînement final sur l'ensemble des 54 402 accidents.
+- **Résultat :** `k=3` est le meilleur nombre de clusters parmi les valeurs testées, avec un **score de silhouette de 0,1769**.
+
+| Cluster | Profil descriptif | Accidents | Part |
+|---|---|---:|---:|
+| 0 | Urbain, principalement nocturne | 11 496 | 21,1 % |
+| 1 | Hors agglomération, majoritairement diurne | 20 286 | 37,3 % |
+| 2 | Urbain, de jour | 22 620 | 41,6 % |
+| **Total** | | **54 402** | **100 %** |
+
+Les profils sont des **descriptions établies après le regroupement**. Le score de silhouette relativement faible indique une séparation limitée entre les groupes : cette segmentation est **exploratoire** et ne constitue ni une classification de risques routiers ni une preuve de catégories naturelles nettement distinctes.
+
+**Résultats visuels :**
+
+![Répartition des accidents entre les trois clusters](machine_learning/graphique_repartition_clusters.png)
+
+![Conditions de luminosité selon les clusters](machine_learning/graphique_luminosite_clusters.png)
+
+Les scripts Python, les fichiers CSV, les résultats détaillés, les instructions de reproduction et les limites méthodologiques sont documentés dans le **[README du module Machine Learning](machine_learning/README.md)**.
+
 ## Méthode et limites
 
 La préparation et les contrôles ont été réalisés dans Navicat Premium Lite, MySQL servant au stockage et aux requêtes. Une anomalie de comparaison des longitudes textuelles a été corrigée dans la vue cartographique par normalisation des virgules décimales et conversion explicite. Les volumes décrivent les accidents enregistrés, **pas un risque rapporté au trafic**. L'analyse de 2024 ne permet pas d'établir une tendance pluriannuelle.
@@ -91,6 +119,7 @@ La préparation et les contrôles ont été réalisés dans Navicat Premium Lite
 - Documenter la **version du pilote MySQL** utilisé et vérifier, si nécessaire, l'acceptation de Navicat Premium Lite par le formateur.
 - Tester le **rafraîchissement Tableau et les interactions après restauration**, sur l'environnement prévu pour la soutenance.
 - Contrôler les **secrets, les métadonnées, les droits de réutilisation et l'historique Git** avant de rendre le dépôt public.
-- Manifeste SHA256 généré et contrôlé le 16 novembre 2026 : 42 fichiers vérifiés, empreintes et tailles conformes.- Vérifier la visibilité **Public** et l'accès anonyme au dépôt, puis répéter la soutenance.
+- Manifeste SHA256 généré et contrôlé le 16 novembre 2026 : 42 fichiers vérifiés, empreintes et tailles conformes.
+- Vérifier la visibilité **Public** et l'accès anonyme au dépôt, puis répéter la soutenance.
 
 Voir [CHECKLIST_AVANT_REMISE.md](CHECKLIST_AVANT_REMISE.md). **Ne jamais publier de mot de passe.**
