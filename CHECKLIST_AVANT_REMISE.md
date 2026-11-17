@@ -8,7 +8,7 @@
 - [x] 13 scripts SQL historiques Navicat (non destinés à une exécution en bloc).
 - [x] Requêtes de contrôle d'import et résultats d'intégrité.
 - [x] Rapport technique Word et PDF.
-- [x] Présentation PowerPoint et PDF (12 diapositives).
+- [x] Présentation PowerPoint et PDF.
 - [x] README, provenance des données et structure du dépôt.
 
 ## Vérifications réalisées et documentées
@@ -19,18 +19,20 @@
 - [x] Quatre vérifications de relations : 0 référence orpheline détectée sur les relations contrôlées, pour les clés non nulles.
 - [x] Captures et fichiers de résultats enregistrés dans `captures/` et `sql/controle/`.
 
-## À terminer avant publication et remise
+## Suivi documentaire après la soutenance
 
 - [ ] Renseigner la date exacte du téléchargement initial des données.
 - [ ] Documenter les dimensions, l'encodage, les séparateurs et la procédure réelle d'import des quatre CSV.
 - [ ] Tester la reconnexion Tableau Desktop et les six dashboards après restauration MySQL, puis les interactions.
 - [ ] Relever le nom et la version du pilote MySQL effectivement utilisé.
 - [ ] Confirmer l'acceptation de Navicat Premium Lite par le formateur si nécessaire.
-- [ ] Contrôler les licences, les métadonnées, les secrets et l'historique Git avant publication publique.
-- [x] Régénérer `MANIFEST_SHA256.tsv` :42 fichiers contrôlés avec succès.
-- [ ] Passer le dépôt GitHub en **Public** et tester l'accès en navigation privée.
+- [ ] Recontrôler les licences, les métadonnées, les secrets et l'historique Git après les dernières modifications (dépôt déjà public).
+- [ ] Régénérer `MANIFEST_SHA256.tsv` sur l'état final du dépôt (le manifeste historique ne référence que 42 fichiers).
+- [x] Dépôt GitHub en **Public** (visibilité confirmée le 17 novembre 2026).
+- [ ] Tester l'accès anonyme au dépôt en navigation privée.
 - [ ] Vérifier tous les liens du README.
-- [ ] Répéter la soutenance (10–15 minutes) et prévoir les captures de secours.
+- [x] Soutenance orale effectuée (confirmation de l'auteur).
+- [ ] Après actualisation des documents, exécuter `python scripts/preparer_publication.py --scan`, `--write`, puis `--check` dans la copie locale à jour et publier le nouveau manifeste.
 
 **Attention :** l'export SQL contient des instructions de suppression / recréation. Ne pas l'exécuter dans une base de production ou contenant du travail non sauvegardé.
 
