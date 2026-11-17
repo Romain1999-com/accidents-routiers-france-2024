@@ -27,12 +27,14 @@
 - [ ] Relever le nom et la version du pilote MySQL effectivement utilisé.
 - [ ] Confirmer l'acceptation de Navicat Premium Lite par le formateur si nécessaire.
 - [ ] Recontrôler les licences, les métadonnées, les secrets et l'historique Git après les dernières modifications (dépôt déjà public).
-- [ ] Régénérer `MANIFEST_SHA256.tsv` sur l'état final du dépôt (le manifeste historique ne référence que 42 fichiers).
+- [x] Générer et contrôler localement `MANIFEST_SHA256.tsv` pour 54 fichiers (`--write`, puis `--check`), avant les dernières corrections documentaires.
+- [ ] Après correction du README et de cette checklist, régénérer et republier le manifeste pour qu'il reflète les empreintes actuelles.
 - [x] Dépôt GitHub en **Public** (visibilité confirmée le 17 novembre 2026).
 - [ ] Tester l'accès anonyme au dépôt en navigation privée.
 - [ ] Vérifier tous les liens du README.
 - [x] Soutenance orale effectuée (confirmation de l'auteur).
-- [ ] Après actualisation des documents, exécuter `python scripts/preparer_publication.py --scan`, `--write`, puis `--check` dans la copie locale à jour et publier le nouveau manifeste.
+- [x] Exécuter une première recherche indicative de secrets (`--scan`) : aucun motif détecté lors du contrôle local antérieur.
+- [ ] Après synchronisation de ces corrections GitHub vers la copie locale, relancer `python scripts/preparer_publication.py --scan`, `--write`, puis `--check`, puis publier le manifeste mis à jour.
 
 **Attention :** l'export SQL contient des instructions de suppression / recréation. Ne pas l'exécuter dans une base de production ou contenant du travail non sauvegardé.
 
