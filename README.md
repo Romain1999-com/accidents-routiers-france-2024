@@ -1,6 +1,6 @@
 # Accidents routiers en France — 2024
 
-**Livrable du TP Data Visualisation Open Data — mise à jour documentaire du 16 novembre 2026**
+**Livrable du TP Data Visualisation Open Data — documentation actualisée le 17 novembre 2026, après soutenance**
 
 **Chaîne de traitement :** données ouvertes BAAC 2024 → import et préparation SQL avec Navicat Premium Lite / MySQL → vues SQL → connexion MySQL directe → Tableau Desktop → six tableaux de bord → clustering K-means sous Python → soutenance.
 
@@ -26,9 +26,9 @@ Voir [data/README.md](data/README.md) pour les sources, les volumes, les contrô
 | `tableau/` | Classeur `.twbx` (18 feuilles, 6 dashboards) et procédure de reconnexion |
 | `captures/` | Six captures de dashboards et quatre captures techniques |
 | `documentation/` | Rapport technique Word et PDF |
-| `presentation/` | Soutenance PowerPoint et PDF (10 à 15 minutes) |
+| `presentation/` | Support de soutenance PowerPoint et PDF |
 | `data/` | Provenance des données, métadonnées et contrôles |
-| `MANIFEST_SHA256.tsv` | Manifeste historique : **à régénérer après les dernières modifications**, voir la checklist |
+| `MANIFEST_SHA256.tsv` | Manifeste SHA256 historique (42 fichiers) : **actualisation nécessaire** après les ajouts Machine Learning et les dernières modifications |
 
 ## Indicateurs de référence (DB06, sans filtre départemental)
 
@@ -113,13 +113,22 @@ Les scripts Python, les fichiers CSV, les résultats détaillés, les instructio
 
 La préparation et les contrôles ont été réalisés dans Navicat Premium Lite, MySQL servant au stockage et aux requêtes. Une anomalie de comparaison des longitudes textuelles a été corrigée dans la vue cartographique par normalisation des virgules décimales et conversion explicite. Les volumes décrivent les accidents enregistrés, **pas un risque rapporté au trafic**. L'analyse de 2024 ne permet pas d'établir une tendance pluriannuelle.
 
-## Vérifications restant à terminer avant publication
+## État du projet après soutenance (17 novembre 2026)
 
-- Compléter la **date initiale de collecte**, les dimensions et les formats exacts des CSV, ainsi que les paramètres d'import.
-- Documenter la **version du pilote MySQL** utilisé et vérifier, si nécessaire, l'acceptation de Navicat Premium Lite par le formateur.
-- Tester le **rafraîchissement Tableau et les interactions après restauration**, sur l'environnement prévu pour la soutenance.
-- Contrôler les **secrets, les métadonnées, les droits de réutilisation et l'historique Git** avant de rendre le dépôt public.
-- Manifeste SHA256 généré et contrôlé le 16 novembre 2026 : 42 fichiers vérifiés, empreintes et tailles conformes.
-- Vérifier la visibilité **Public** et l'accès anonyme au dépôt, puis répéter la soutenance.
+- **Soutenance orale : réalisée**, selon la confirmation de l'auteur.
+- **Dépôt GitHub : public**, branche `main` (visibilité vérifiée le 17 novembre 2026).
+- **Restauration MySQL et contrôles de relations : réalisés** dans l'environnement de test décrit plus haut.
+- **Machine Learning : intégré** au dépôt avec scripts, données, profils et graphiques.
+- **Manifeste SHA256 : à actualiser**. Le manifeste actuellement publié référence 42 fichiers et précède les ajouts et modifications récents. Il ne doit pas être présenté comme une vérification de l'état actuel du dépôt.
 
-Voir [CHECKLIST_AVANT_REMISE.md](CHECKLIST_AVANT_REMISE.md). **Ne jamais publier de mot de passe.**
+### Informations documentaires encore à confirmer
+
+- **Date initiale de téléchargement des quatre CSV BAAC 2024** : non retrouvée dans les éléments documentés. Ne pas lui substituer la date de contrôle du 16 novembre 2026.
+- **Métadonnées des CSV sources** : dimensions exactes, séparateurs et encodages de chacun des quatre fichiers, ainsi que les paramètres réellement utilisés lors de l'importation Navicat. Voir [data/README.md](data/README.md).
+- **Pilote MySQL utilisé par Tableau** : nom et version exacts non documentés.
+- **Test Tableau sur une base MySQL restaurée et/ou un autre poste** : non confirmé ; la restauration SQL ne démontre pas à elle seule le fonctionnement du classeur sur une autre installation.
+- **Contrôles de publication à refaire après les derniers changements** : recherche indicative de secrets, examen des métadonnées, vérification des liens et régénération du manifeste SHA256. Une recherche automatique antérieure n'avait signalé aucun motif de secret, mais ce contrôle n'est pas exhaustif.
+
+Le dépôt étant déjà public, ces éléments relèvent du **suivi documentaire et de la vérification finale**, et non de conditions préalables à sa mise en ligne.
+
+Voir [CHECKLIST_AVANT_REMISE.md](CHECKLIST_AVANT_REMISE.md) et [scripts/preparer_publication.py](scripts/preparer_publication.py). **Ne jamais publier de mot de passe.**
