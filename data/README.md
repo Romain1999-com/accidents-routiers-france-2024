@@ -46,12 +46,20 @@ Pour le fichier des caractéristiques, le séparateur CSV utilisé est le point-
 
 Ces valeurs correspondent aux volumes documentés dans la base MySQL après importation. Elles ne constituent pas une vérification indépendante des dimensions des fichiers CSV bruts.
 
-## 5. Informations restant à vérifier
+## 5. Métadonnées des fichiers sources restant à confirmer
 
-- Date exacte du téléchargement initial.
-- Nombre de colonnes de chacun des quatre fichiers sources.
-- Encodage et délimiteur exacts de chaque fichier.
-- Dimensions initiales des fichiers CSV, avant importation.
+Les nombres de lignes ci-dessus décrivent **les tables MySQL importées**, pas nécessairement les fichiers CSV d'origine. Les métadonnées exactes des quatre fichiers sources ne sont pas établies par les contrôles SQL.
+
+| Fichier | Date du téléchargement initial | Nombre de lignes et colonnes du CSV brut | Séparateur | Encodage |
+|---|---|---|---|---|
+| `caract-2024.csv` | À confirmer | À confirmer | `;` (documenté pour l'import) | À confirmer |
+| `lieux-2024.csv` | À confirmer | À confirmer | À confirmer | À confirmer |
+| `vehicules-2024.csv` | À confirmer | À confirmer | À confirmer | À confirmer |
+| `usagers-2024.csv` | À confirmer | À confirmer | À confirmer | À confirmer |
+
+Pour renseigner ce tableau, retrouver les quatre fichiers originaux et leur provenance de téléchargement, inspecter leurs en-têtes, leurs séparateurs et leurs encodages, puis conserver la distinction entre **format du fichier source** et **paramètres réellement appliqués dans Navicat**. Si la date initiale ne peut être retrouvée, la mention « non documentée » est préférable à une date estimée.
+
+**Paramètres d'importation Navicat à documenter si disponibles :** encodage choisi, délimiteur, présence d'une ligne d'en-tête, correspondance des colonnes, conversions de types et traitement des valeurs manquantes. Ne pas déduire ces réglages de la seule structure SQL restaurée.
 
 ## 6. Reproductibilité
 
